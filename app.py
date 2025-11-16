@@ -4,10 +4,13 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import json
 import numpy as np
 
-# Load tokenizer
-with open("tokenizer.json") as f:
-    data = json.load(f)
-    tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(data)
+
+# Load tokenizer properly as JSON string
+with open("tokenizer.json", "r") as f:
+    tokenizer_json = f.read()
+
+tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(tokenizer_json)
+
 
 # Load model
 model = tf.keras.models.load_model("review_classifier.h5")
